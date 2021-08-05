@@ -8,7 +8,8 @@ const router = express.Router();
 // @access public
 router.post('/', ( req: Request, res: Response ) => {
 
-    res.send( 'Sign In Endpoint')
+    req.session = null;
+    res.status( 200 ).send({})
     return;
 })
 
@@ -18,7 +19,7 @@ router.post('/', ( req: Request, res: Response ) => {
 // @access 
 router.get('/', ( req: Request, res: Response ) => {
 
-    res.send( 'Sign In Endpoint')
+    res.send( 'Sign Out Endpoint')
     return;
 })
 

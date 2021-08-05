@@ -1,17 +1,36 @@
 import express from 'express';
-
+import bodyParser from 'body-parser';
+import cookieSession from 'cookie-session';
+const asyncErrors = require('express-async-errors');
 
 
 const app = express();
 
-const PORT = process.env.PORT || 8083;
 
 
-import { Signin, Signout, Signup, User } from './api';
-app.listen( PORT , ( ) => {
-    console.log( ` app listening `);
-} )
-app.use( '/signin', Signin );
-app.use( '/signout', Signout );
-app.use( '/signup', Signup );
-app.use( '/user', User );
+
+import { Signin, Signout, Signup, CurrentUser } from './api/routes';
+
+import { PATHS } from './api/constants';
+import { errorHandler } from './api/middlewares/error-handler';
+import { CustomError } from './api/errors';
+import { NotFoundError } from './api/errors/404';
+
+
+app.use( express.urlencoded( { extended: false} ) );
+app.use( express.json() );
+app.use( cookieSession({
+    signed: false
+}))
+
+app.use( PATHS.signin, Signin );
+app.use( PATHS.signout, Signout );
+app.use( PATHS.signup, Signup );
+app.use(  PATHS.currentUser , CurrentUser );
+
+app.all( '*', ()=>{
+    throw new NotFoundError();
+})
+app.use( errorHandler );
+
+export default app;
