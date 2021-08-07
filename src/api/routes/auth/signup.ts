@@ -49,7 +49,7 @@ validateRequest,
     const uJwt = jwt.sign({
         id: user.id,
         email: user.email
-    }, process.env.JWT_KEY ! );
+    }, "" + process.env.JWT_KEY ! );
 
     req.session = {
         jwt: uJwt

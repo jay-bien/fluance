@@ -8,6 +8,7 @@ const start = async ( ) => {
     await mongoose.connect( dbUrl,{
         useFindAndModify: true,
         useCreateIndex: true,
+        
         useNewUrlParser: true,
         useUnifiedTopology: true
     } );

@@ -38,7 +38,6 @@ router.post('/', [
     }
 
     const isMatch = await Password.compare( password, user.password );
-    console.log( isMatch );
     if( ! isMatch ){
         throw new BadRequest( 'Invalid credentials.' )
     }
@@ -46,13 +45,13 @@ router.post('/', [
     const uJwt = jwt.sign({
         id: user.id,
         email: user.email
-    }, process.env.JWT_KEY ! );
+    }, "" + process.env.JWT_KEY ! );
 
     req.session = {
         jwt: uJwt
-        };
+    };
 
-    return res.status( 200 ).send( user );
+    return res.status( 200 ).send(  user );
         
 })
 
