@@ -20,7 +20,6 @@ beforeAll( async  ( ) => {
        } catch( e ){
             throw new DatabaseConnectionError("Cannot connect to databse.")
        }
-    console.log(" Before all tests.")
 })
 
 beforeEach( async ( ) => {

@@ -7,24 +7,17 @@ const router = express.Router();
 
 
 
-// @route POST 
-// @desc sign in a user
-// @access public
-router.post('/', ( req: Request, res: Response ) => {
 
-    res.send( 'User Endpoint')
-    return;
-})
-
-
-// @route 
-// @desc 
-// @access 
+// @route /auth/currentUser
+// @desc get current logged in user info from jwt
+// @access private 
 router.get('/', currentUser, async ( req: Request, res: Response ) => {
 
-        return res.status( 200 ).send( { user : req.currentUser || null })
+    const currU = req.currentUser;
+    if( ! currU ) return res.status( 400 ).send( { user: null } );
 
-
+    console.log( { currU } );
+    return res.status( 200 ).send( { user : currU } );
     return;
 })
 

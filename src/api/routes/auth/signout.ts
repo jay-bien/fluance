@@ -4,7 +4,7 @@ const router = express.Router();
 
 
 // @route POST 
-// @desc sign in a user
+// @desc sign out a user
 // @access public
 router.post('/', ( req: Request, res: Response ) => {
 
@@ -14,12 +14,12 @@ router.post('/', ( req: Request, res: Response ) => {
 })
 
 
-// @route 
-// @desc 
-// @access 
+// @route GET
+// @desc Sign out a user
+// @access public
 router.get('/', ( req: Request, res: Response ) => {
-
-    res.send( 'Sign Out Endpoint')
+    req.session = null;
+    res.status( 200 ).send({})
     return;
 })
 

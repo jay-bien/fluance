@@ -1,7 +1,7 @@
 import { sign } from 'jsonwebtoken';
 import request  from 'supertest';
 import app from '../../app';
-import { createUserGetCookie, signInTest } from '../../test/utils';
+import { createUserGetCookie, signInGetCookie } from '../../test/utils';
 import { PATHS } from '../constants';
 import { email, password  } from './constants';
 
@@ -11,8 +11,8 @@ it( 'Returns a 400 error if password or email are empty.',  async ( ) => {
     // args: ( email, password, status code to expect )
     // throws error if incorrect code
     //  rets cookie
-    await signInTest( email, "", 400);
-    await signInTest( "", password, 400);
+    await signInGetCookie( email, "", 400);
+    await signInGetCookie( "", password, 400);
 
 })
 it( 'Returns a 400 error if email is invalid.' , async ( ) => {
@@ -26,11 +26,11 @@ it( 'Returns a 400 error if email is invalid.' , async ( ) => {
     // args: ( email, password, status code to expect )
     // throws error if incorrect code
     //  rets cookie
-    await signInTest( email0, password, 400 );
-    await signInTest( email1, password, 400 );
-    await signInTest( email2, password, 400 );
-    await signInTest( email3, password, 400 );
-    await signInTest( email4, password, 400 );
+    await signInGetCookie( email0, password, 400 );
+    await signInGetCookie( email1, password, 400 );
+    await signInGetCookie( email2, password, 400 );
+    await signInGetCookie( email3, password, 400 );
+    await signInGetCookie( email4, password, 400 );
 
     return;
     
@@ -39,18 +39,18 @@ it( 'Returns a 400 error if email is invalid.' , async ( ) => {
 
 
 it( 'Returns a 400 error if email is not found.', async ( ) => {
-    await signInTest( "gobbledygooke@gmail.com", password, 400 );
+    await signInGetCookie( "gobbledygooke@gmail.com", password, 400 );
 })
 
 it( 'Returns a 200 and sets a cookie email and password are valid.',  async ( ) => {
     const cookie = await createUserGetCookie( email, password, 201 );
-    await signInTest( email, password, 200 );
+    await signInGetCookie( email, password, 200 );
 });
 
 
 it( 'Sets a cookie on successful signin.',  async ( ) => {
     const cookie = await createUserGetCookie( email, password, 201 );
-    const cookie1 = await signInTest( email, password, 200 );
+    const cookie1 = await signInGetCookie( email, password, 200 );
     expect( Array.isArray( cookie1 ) ).toBe( true );
     expect( cookie1.length ).toBeGreaterThan( 0 );
 

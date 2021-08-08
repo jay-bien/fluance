@@ -32,7 +32,6 @@ router.post('/', [
     } catch( e ){
         throw new DatabaseConnectionError( 'Please try again later.' ); 
     }
-    console.log( process.env.JWT_KEY );
     if( ! user ) {
         throw new BadRequest( 'Cannot find this user.' )
     }

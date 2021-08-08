@@ -13,7 +13,7 @@ export const createUserGetCookie = async ( email: string, password: string, expe
 }
 
 
-export const signInTest = async ( email: string, password: string, expectCode: number ) : Promise< string[] > => {
+export const signInGetCookie = async ( email: string, password: string, expectCode: number ) : Promise< string[] > => {
     const response = await request( app )
     .post( PATHS.signin )
     .send(
@@ -28,4 +28,17 @@ export const signInTest = async ( email: string, password: string, expectCode: n
 
     // console.log( { cookie  } );
     return cookie;
+}
+
+export const getCurrentUser = async ( expectCode: number, cookie? : string[] ) : Promise< object > => {
+
+    const cook = ( cookie && cookie.length >= 0 ) ? cookie : [];
+
+    const response = await request( app )
+        .get( PATHS.currentUser )
+        .set('Cookie', cookie || [] )
+        .send({})
+        .expect( expectCode );
+
+        return response;
 }
