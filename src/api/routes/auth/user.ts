@@ -14,11 +14,10 @@ const router = express.Router();
 router.get('/', currentUser, async ( req: Request, res: Response ) => {
 
     const currU = req.currentUser;
+    console.log({ currU });
     if( ! currU ) return res.status( 400 ).send( { user: null } );
-
-    console.log( { currU } );
     return res.status( 200 ).send( { user : currU } );
-    return;
+    
 })
 
 export default router;

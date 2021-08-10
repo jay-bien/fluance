@@ -33,7 +33,6 @@ export const signInGetCookie = async ( email: string, password: string, expectCo
 export const getCurrentUser = async ( expectCode: number, cookie? : string[] ) : Promise< object > => {
 
     const cook = ( cookie && cookie.length >= 0 ) ? cookie : [];
-
     const response = await request( app )
         .get( PATHS.currentUser )
         .set('Cookie', cookie || [] )
