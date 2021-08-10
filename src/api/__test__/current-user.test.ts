@@ -16,7 +16,7 @@ it( 'Returns a 400 error if no cookie.',  async ( ) => {
 
 })
 
-it( 'Returns a 200 and user if valid cookie.',  async ( ) => {
+it( 'Returns a 200 and matching user if valid cookie.',  async ( ) => {
 
     // func: createUserGetCookie( ) from utils
     //  args: ( email, password, expectedStatusCode )
@@ -26,11 +26,11 @@ it( 'Returns a 200 and user if valid cookie.',  async ( ) => {
 
     // func: getCurrentUser( ) from utils
     //  args: ( statusCode, cookie = null )
-    // rets: { user{ ... } } || {user { null } }
+    // rets: { user{ ... } } || {user : null  }
+    const res = await getCurrentUser( 200, cookie );
+    
+    expect( res.user?.email ).toBe( email );
 
-    const user1 = await getCurrentUser( 200, cookie );
-
-    console.log({ user1 });
     return;
 
 })

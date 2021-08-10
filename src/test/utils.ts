@@ -30,14 +30,32 @@ export const signInGetCookie = async ( email: string, password: string, expectCo
     return cookie;
 }
 
-export const getCurrentUser = async ( expectCode: number, cookie? : string[] ) : Promise< object > => {
+
+interface User {
+    id: string
+    email: string
+}
+interface UserRes {
+    user : User | null
+}
+
+export const getCurrentUser = async ( expectCode: number, cookie? : string[] ) : Promise< UserRes > => {
 
     const cook = ( cookie && cookie.length >= 0 ) ? cookie : [];
     const response = await request( app )
         .get( PATHS.currentUser )
-        .set('Cookie', cookie || [] )
+        .set('Cookie', cook )
         .send({})
         .expect( expectCode );
 
-        return response;
+        return response.body;
+}
+
+export const signOut = async ( expectCode: number ): Promise< string[] > => {
+
+    const response = await request( app )
+        .post( PATHS.signout )
+        .send({ })
+        .expect( expectCode )
+        return response.get( 'Set-Cookie' );
 }
