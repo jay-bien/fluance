@@ -9,7 +9,13 @@ const app = express();
 
 
 
-import { Signin, Signout, Signup, CurrentUser } from './api/routes';
+import { Signin,
+         Signout,
+         Signup,
+         CurrentUser,
+         Tickets
+        } 
+        from './api/routes';
 
 import { PATHS } from './api/constants';
 import { errorHandler } from './api/middlewares/error-handler';
@@ -27,10 +33,11 @@ app.use( PATHS.signin, Signin );
 app.use( PATHS.signout, Signout );
 app.use( PATHS.signup, Signup );
 app.use(  PATHS.currentUser , CurrentUser );
+app.use( PATHS.tickets, Tickets )
 
 app.all( '*', ()=>{
     throw new NotFoundError();
 })
 app.use( errorHandler );
-
+ 
 export default app;

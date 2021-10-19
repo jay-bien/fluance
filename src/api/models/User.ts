@@ -15,13 +15,13 @@ const userSchema = new mongoose.Schema({
         type: Number,
         required: false
     },
-    givenName:{
+    given_name:{
 
     },
-    familyName:{
+    family_name:{
 
     },
-    preferredName:{
+    preferred_name:{
 
     },
     city:{
@@ -33,12 +33,20 @@ const userSchema = new mongoose.Schema({
     photo:{
 
     },
-    membershipActive:{
+    membership_active:{
 
     },
-    membershipLevel:{
+    membership_tier:{
 
     },
+    recurring:{
+
+    },
+    recur_start:{
+
+    },
+    recur_end:{},
+    recur_interval:{},
     permissions:{
         
     }

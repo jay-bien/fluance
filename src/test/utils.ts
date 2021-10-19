@@ -24,9 +24,7 @@ export const signInGetCookie = async ( email: string, password: string, expectCo
     )
     .expect( expectCode );
 
-    const cookie = response.get('Set-Cookie')
-
-    // console.log( { cookie  } );
+    const cookie = response.get('Set-Cookie');
     return cookie;
 }
 

@@ -5,6 +5,7 @@ const   PATHS = {
     signin: "/signin",
     signout: "/signout",
     currentUser: "/currentUser",
+    tickets: "/tickets"
 } 
 
 export {
