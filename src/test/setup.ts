@@ -2,7 +2,6 @@ import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
 import { DatabaseConnectionError } from '../api/errors';
 
-
 let mongo: any;
 beforeAll( async  ( ) => {
 
@@ -23,6 +22,10 @@ beforeAll( async  ( ) => {
 })
 
 beforeEach( async ( ) => {
+
+
+    jest.setTimeout(120000);
+    jest.useFakeTimers('legacy');
 
 
     const collections = await mongoose.connection.db.collections();

@@ -15,43 +15,19 @@ const userSchema = new mongoose.Schema({
         type: Number,
         required: false
     },
-    given_name:{
-
-    },
-    family_name:{
-
-    },
-    preferred_name:{
-
-    },
-    city:{
-
-    },
-    zip:{
-
-    },
-    photo:{
-
-    },
-    membership_active:{
-
-    },
-    membership_tier:{
-
-    },
-    recurring:{
-
-    },
-    recur_start:{
-
-    },
+    given_name:{},
+    family_name:{},
+    preferred_name:{},
+    city:{},
+    zip:{},
+    photo:{},
+    membership_active:{ },
+    membership_tier:{},
+    recurring:{},
+    recur_start:{},
     recur_end:{},
     recur_interval:{},
-    permissions:{
-        
-    }
-
-
+    permissions:{}
 });
 
 userSchema.pre('save', async function( done ){

@@ -6,13 +6,14 @@ import request  from 'supertest';
 import app from '../../app';
 
 
-it('has a route handler listening at api path/tickets for ', async ( ) => {
+it('has a post route handler listening at api path/tickets for ', async ( ) => {
 
     const response = await request( app )
         .post( PATHS.tickets )
         .send("")
         
-    expect( response.status ).not.toEqual( 404 )
+    expect( response.status ).not.toEqual( 404 );
+    return;
 })
 it('cannot be accessed if user is not signed in', async ( ) => {
 
@@ -24,8 +25,10 @@ it('cannot be accessed if user is not signed in', async ( ) => {
     return
 
 })
-it('returns an error if price is invalid', async ( ) => {
-    const cookie = await createUserGetCookie( "jay@gmail.com", "lkhjsaddkl", 201 );
+it('returns an error if price cannot be converted to a floating greater than 0', async ( ) => {
+
+
+    const cookie = await createUserGetCookie( email, password, 201 );
 
     
     const response = await request( app )
@@ -36,14 +39,12 @@ it('returns an error if price is invalid', async ( ) => {
             price: ''
         });
 
-        console.warn({response})
         
     expect( response.status ).toBe( 400 )
     return;
 })
 it('returns an error if title is invalid', async ( ) => {
-
-    const cookie = await createUserGetCookie( "jay@gmail.com", "lkhjsaddkl", 201 );
+    const cookie = await createUserGetCookie( email, password, 201 );
 
     
     const response = await request( app )
@@ -59,10 +60,6 @@ it('returns an error if title is invalid', async ( ) => {
         
     expect( response.status ).toBe( 400 )
     return;
-})
-it('', async ( ) => {
-    return;
-
 })
 it('', async ( ) => {
     return;

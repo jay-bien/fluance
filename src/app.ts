@@ -1,7 +1,9 @@
 import express from 'express';
+require('express-async-errors');
+
+
 import bodyParser from 'body-parser';
 import cookieSession from 'cookie-session';
-const asyncErrors = require('express-async-errors');
 
 
 const app = express();

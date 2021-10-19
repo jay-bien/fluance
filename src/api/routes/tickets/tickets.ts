@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
-import { BadRequest } from '../errors';
-import { currentUser,  requireAuth } from '../middlewares';
+import { BadRequest } from '../../errors';
+import { currentUser,  requireAuth, validateRequest } from '../../middlewares';
 import { body, validationResult} from 'express-validator';
 const router = express.Router( );
 
@@ -22,8 +22,9 @@ router.post('/',
             .isFloat({ gt: 0})
             .withMessage("Price must be greater than 0.")
     ],
-    validationResult,    
+    validateRequest,    
     async ( req: Request, res: Response )=> {
+        console.warn("WTF IS GOING ON HERE");
 
     const { title, price } = req.body;
     

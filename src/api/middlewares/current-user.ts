@@ -28,6 +28,6 @@ export const currentUser = async ( req: Request, res: Response, next: NextFuncti
         req.currentUser = null;
         console.log("Bad compare")
     }
-    return next();
+    next();
 
 }
