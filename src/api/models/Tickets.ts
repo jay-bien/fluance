@@ -5,22 +5,22 @@ import { ObjectID } from "mongodb";
 interface TicketAttrs{
     title: string,
     price: number,
-    userId: string,
+    created_by: string,
 }
 
 interface TicketDoc extends mongoose.Document {
     title: string,
     price: number,
-    created_by: ObjectID
+    created_by: string
 }
 
-interface TicketModel extends mongoose.Model< TicketDoc >{
+interface TicketModel extends mongoose.Model< any >{
     build( attrs : TicketAttrs ) : TicketDoc;
 }
 
 const ticketSchema = new mongoose.Schema({
     title:{
-        type: Number,
+        type: String,
         isRequired: true
     },
     price: {
@@ -60,11 +60,14 @@ const ticketSchema = new mongoose.Schema({
 
 }, );
 
-const Ticket = mongoose.model< TicketDoc, TicketModel >( 'Ticket', ticketSchema );
-
 ticketSchema.statics.build = ( attrs: TicketAttrs ) => {
+
     return new Ticket( attrs );
 };
+
+
+const Ticket = mongoose.model< TicketDoc, TicketModel >( 'Ticket', ticketSchema );
+
 
 
 export { Ticket }
