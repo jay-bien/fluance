@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { ObjectID } from "mongodb";
 
 
 interface TicketAttrs{
@@ -18,8 +19,16 @@ interface TicketModel extends mongoose.Model< TicketDoc >{
 }
 
 const ticketSchema = new mongoose.Schema({
-    created_by: {
+    title:{
         type: Number,
+        isRequired: true
+    },
+    price: {
+        type: String,
+        isRequired: true
+    },
+    created_by: {
+        type: ObjectID,
         isRequired: true
     },
     owned_by:{
@@ -28,7 +37,7 @@ const ticketSchema = new mongoose.Schema({
     },
     event_id:{
         type: Number,
-        isRequired: true
+        isRequired: false
     },
     date_purchased: {
         type: Date,

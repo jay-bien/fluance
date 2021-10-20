@@ -1,7 +1,11 @@
 import { Request, Response, NextFunction} from 'express';
 import jwt from 'jsonwebtoken';
 
-
+/*
+if client sends valid jwt,
+decode jwt and add the user to the request object
+if invalid jwt or no jwt, req.user will be set to null
+*/
 interface UserPayload {
     id: string,
     email: string
