@@ -67,8 +67,11 @@ it('returns an error if no title or is invalid', async ( ) => {
         
     expect( response.status ).toBe( 400 )
     return;
-})
-it('', async ( ) => {
+});
+
+
+
+it('Creates a ticket ', async ( ) => {
     return;
 
 })

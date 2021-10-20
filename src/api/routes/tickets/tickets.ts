@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import { BadRequest } from '../../errors';
 import { currentUser,  requireAuth, validateRequest } from '../../middlewares';
 import { body, validationResult} from 'express-validator';
+import { } from '../../models';
 const router = express.Router( );
 
 
@@ -29,8 +30,11 @@ router.post('/',
     const { title, price } = req.body;
     
     if( !title || !price ) throw new BadRequest("Must include a title and a price.");
+
+
     
-    return res.status( 200 ).send({})
+    
+    return res.status( 200 ).send({  })
 })
 
 
