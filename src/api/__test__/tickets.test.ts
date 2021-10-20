@@ -27,10 +27,9 @@ it('cannot be accessed if user is not signed in', async ( ) => {
 })
 it('returns an error if price cannot be converted to a floating greater than 0', async ( ) => {
 
-
     const cookie = await createUserGetCookie( email, password, 201 );
 
-    
+    // no price
     const response = await request( app )
         .post( PATHS.tickets )
         .set('Cookie', cookie )
@@ -38,12 +37,23 @@ it('returns an error if price cannot be converted to a floating greater than 0',
             title: "Title Valid",
             price: ''
         });
-
         
-    expect( response.status ).toBe( 400 )
+        // price is string not able to be converted to float
+    const response2 = await request( app )
+                    .post( PATHS.tickets )
+                    .set('Cookie', cookie )
+                    .send({
+                        title:"Valid title",
+                        price: "string"
+                    });
+        
+    expect( response.status ).toBe( 400 );
+    expect( response2.status ).toBe( 400 );
     return;
 })
-it('returns an error if title is invalid', async ( ) => {
+
+
+it('returns an error if no title or is invalid', async ( ) => {
     const cookie = await createUserGetCookie( email, password, 201 );
 
     
@@ -54,9 +64,6 @@ it('returns an error if title is invalid', async ( ) => {
             title: "",
             price: 18
         });
-
-    console.warn({response})
-
         
     expect( response.status ).toBe( 400 )
     return;
