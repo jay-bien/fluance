@@ -1,5 +1,5 @@
 import  { email, password } from './constants';
-import { createUserGetCookie } from '../../test/utils';
+import { createUserGetCookie } from '../../../test/utils';
 
 
 

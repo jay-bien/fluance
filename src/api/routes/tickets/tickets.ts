@@ -4,6 +4,7 @@ import { currentUser,  requireAuth, validateRequest } from '../../middlewares';
 import { body, validationResult} from 'express-validator';
 import { Ticket } from '../../models';
 import { Tickets } from '..';
+import { NotFoundError } from '../../errors/404';
 const router = express.Router( );
 
 
@@ -83,12 +84,12 @@ router.get( '/:ticket_id',
 
             const ticket = await Ticket.findById( ticketId );
             if( ticket ) return res.status( 200 ).send({ ticket });
-            throw new BadRequest( "Cannot retrieve that ticket" );
+            throw new NotFoundError( );
 
         } catch( e ){
 
             console.log({ e });
-            throw new BadRequest( "Cannot retrieve that ticket" );
+            throw new NotFoundError();
 
 
         }

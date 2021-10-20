@@ -1,10 +1,10 @@
 
-import { PATHS } from '../constants';
+import { PATHS } from '../../constants';
 import  { email, password } from './constants';
-import { createUserGetCookie, getCurrentUser, signOut } from '../../test/utils';
+import { createUserGetCookie } from '../../../test/utils';
 import request  from 'supertest';
-import app from '../../app';
-import { Tickets } from '../routes';
+import app from '../../../app';
+import { Ticket } from '../../models';
 
 
 it('has a post route handler listening at api path/tickets for ', async ( ) => {
@@ -75,6 +75,8 @@ it('Creates a ticket succesfully.', async ( ) => {
 
     const cookie = await createUserGetCookie( email, password, 201 );
 
+    let allTickets = await Ticket.find( { } )
+    expect( allTickets.length ).toBe( 0 );
 
 
     const ticket = {
@@ -88,48 +90,11 @@ it('Creates a ticket succesfully.', async ( ) => {
 
      
 
-    const allTickets = await request( app )
-        .get( PATHS.tickets )
-        .set( 'Cookie', cookie )
-        .send( )
-
-        console.warn( allTickets.body );
-
-        expect( allTickets.body.tickets.length ).toBeGreaterThan( 0 );
-    return;
-
-})
-
-
-it('Created ticket is retrievable and matches submitted ticket.', async ( ) => {
-
-    const cookie = await createUserGetCookie( email, password, 201 );
-    
-
-
-    const ticket = {
-        title: "valid title",
-        price: 15
-    }
-    const response = await request( app )
-        .post( PATHS.tickets )
-        .set('Cookie', cookie )
-        .send( ticket );
-
-        let ticketId = response.body._id;
-        expect( response.status ).toBe( 201 );
-
-        const retrievalResponse = await request( app )
-            .get( `${PATHS.tickets}/${ticketId}` )
-            .set('Cookie', cookie )
-            .send( )
-        let foundTicket = retrievalResponse.body.ticket;
-
-        expect( Number( ticket.price ) ).toEqual( Number( foundTicket.price ) );
-        expect( ticket.title).toEqual( foundTicket.title );
-
-        return
+    allTickets = await Ticket.find({})
+    expect( allTickets.length ).toBeGreaterThan( 0 );
 
     return;
 
 })
+
+

@@ -1,8 +1,8 @@
 import { sign } from 'jsonwebtoken';
 import request  from 'supertest';
-import app from '../../app';
-import { createUserGetCookie, signInGetCookie } from '../../test/utils';
-import { PATHS } from '../constants';
+import app from '../../../app';
+import { createUserGetCookie, signInGetCookie } from '../../../test/utils';
+import { PATHS } from '../../constants';
 import { email, password  } from './constants';
 
 it( 'Returns a 400 error if password or email are empty.',  async ( ) => {

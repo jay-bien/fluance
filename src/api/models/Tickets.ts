@@ -58,7 +58,8 @@ const ticketSchema = new mongoose.Schema({
         type: Number,
     }
 
-}, );
+}, 
+);
 
 ticketSchema.statics.build = ( attrs: TicketAttrs ) => {
 
