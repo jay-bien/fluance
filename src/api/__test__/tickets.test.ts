@@ -71,7 +71,22 @@ it('returns an error if no title or is invalid', async ( ) => {
 
 
 
-it('Creates a ticket ', async ( ) => {
+
+it('Creates a ticket if information is valid.', async ( ) => {
+
+    const cookie = await createUserGetCookie( email, password, 201 );
+
+    const ticket = {
+        title: "valid title",
+        price: 15
+    }
+    const response = await request( app )
+        .post( PATHS.tickets )
+        .set('Cookie', cookie )
+        .send( ticket )
+
+        expect( response.status ).toBe( 201 );
+
     return;
 
 })
