@@ -1,11 +1,8 @@
 import express, { Request, Response } from 'express';
-import { BadRequest, DatabaseConnectionError } from '../../errors';
+import { BadRequest, DatabaseConnectionError, NotFoundError, NotAuthorizedError } from '../../errors';
 import { currentUser,  requireAuth, validateRequest } from '../../middlewares';
-import { body, validationResult} from 'express-validator';
+import { body } from 'express-validator';
 import { Ticket } from '../../models';
-import { Tickets } from '..';
-import { NotFoundError } from '../../errors/404';
-import { NotAuthorizedError } from '../../errors/not-authorized';
 const router = express.Router( );
 
 
@@ -150,12 +147,6 @@ router.put('/:ticket_id',
 
 
         return  res.status( 200 ).send( { ticket });
-
-        
-            
-        
-
-
 
 })
 
