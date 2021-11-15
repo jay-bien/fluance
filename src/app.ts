@@ -21,8 +21,9 @@ import { Signin,
 
 import { PATHS } from './api/constants';
 import { errorHandler } from './api/middlewares/error-handler';
-import { CustomError } from './api/errors';
 import { NotFoundError } from './api/errors/404';
+
+
 
 
 app.use( express.urlencoded( { extended: false} ) );
